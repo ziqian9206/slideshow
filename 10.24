@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="Description" content="轮播"/>
+		<meta name="author" content="ziqian"/>
+		<title>轮播</title>
+		<style type="text/css">
+		*{margin: 0px;padding: 0px;}
+			#start{
+				width: 980px;
+				height: 420px;
+				background: red;
+				margin: 100px auto 0px;
+				border: 2px solid blue;
+				position: relative;
+			}
+			.imglist{
+				width: 980px;
+				height: 420px;
+				position: relative;
+				overflow: hidden;
+				
+			}
+	
+	#start .imglist .list{/*移动list*/
+			width: 9990px;
+			height: 420px;
+		
+			position: absolute;
+		}
+		#start .imglist .list img{float: left;}
+		#start .prev,.next{
+			position: absolute;
+			display: none;
+		}
+		#start .prev{
+			left: -35px;
+			top: 180px;
+		}
+		#start .next{
+			right: -35px;
+			top: 180px;
+		}
+		.prev:hover{
+			background: url(images/aprev.png) no-repeat center;
+		}
+		.next:hover{
+			background: url(images/anext.png) no-repeat center;
+		}
+		#start .but{
+			position: absolute;
+			list-style-type: none;
+			bottom: 0px;
+			left: 400px;
+		}
+		#start ul li{
+			width: 16px;
+			height: 16px;
+			float: left;
+			margin: 5px;
+			background: url(images/but1.png) no-repeat center;
+		}
+		#start .active{
+			background: url(images/but2.png) no-repeat center;
+		}
+		</style>
+	</head>
+	<body>
+		<div id="start">
+			<div class="imglist">
+				<div class="list">
+					<img src="images/flash1.jpg"/>
+					<img src="images/flash2.jpg"/>
+					<img src="images/flash3.jpg"/>
+					<img src="images/flash4.jpg"/>
+					<img src="images/flash5.jpg"/>
+					<img src="images/flash6.jpg"/>
+				</div>
+			</div>
+			<span class="prev"><img src="images/prev.png"/></span>
+			<span class="next"><img src="images/next.png"/></span>
+			<ul class="but">
+				<li class="active"></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				
+			</ul>
+		</div>
+		<script src="js/jquery.js"></script>
+		<script type="text/javascript">
+		var index=0;
+		//index=$("#start li").index();
+			$("#start").hover(function(){
+				$(".prev,.next").show();
+			},function(){
+			$(".prev,.next").hide();
+			})
+			$(".next").click(function(){
+				index++;
+				if(index>5){
+					index=0;
+				}
+				$("#start li").eq(index).addClass("active").siblings().removeClass("active");
+				$(".list").animate({"left":index*-980},500);
+			})
+			$("#start li").click(function(){
+				index=$(this).index();
+				$(this).addClass("active").siblings().removeClass("active");
+				$(".list").animate({"left":index*-980},500);
+			})
+			
+		</script>
+	</body>
+</html>
